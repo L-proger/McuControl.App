@@ -7,3 +7,6 @@
 [submodule "ApiGenerator/ComInterfaceGenerator"]
 	path = ApiGenerator/ComInterfaceGenerator
 	url = https://github.com/L-proger/ComInterfaceGenerator.git
+[submodule "Dependencies/LFramework"]
+	path = Dependencies/LFramework
+	url = https://github.com/L-proger/LFramework.git
