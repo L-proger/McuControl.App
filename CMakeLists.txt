@@ -14,7 +14,10 @@ PRIVATE
 	Src/Main.cpp
 )
 
-#target_include_directories(libMicroNetwork PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/Interfaces")
+target_include_directories(McuControlApp 
+PUBLIC 
+	"${CMAKE_CURRENT_SOURCE_DIR}/Interfaces"
+)
 
 
 #target_compile_definitions(LFramework PUBLIC LF_USB_HOST)

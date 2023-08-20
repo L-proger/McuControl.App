@@ -65,24 +65,40 @@ namespace LFramework{
     template<class TImplementer>
     struct InterfaceRemap<MicroNetwork::Task::MemoryAccess::IHostToDevice, TImplementer> : public InterfaceRemap<LFramework::IUnknown, TImplementer>{
         virtual Result LFRAMEWORK_COM_CALL read(MicroNetwork::Task::MemoryAccess::MemoryRegion request){
-            Result comCallResult_ = this->implementer()->read(request);
-            return comCallResult_;
+            try{
+                this->implementer()->read(request);
+            }
+            catch(...){
+                return LFramework::Result::UnknownFailure;
+            }
+            return LFramework::Result::Ok;
         }
         virtual Result LFRAMEWORK_COM_CALL write(MicroNetwork::Task::MemoryAccess::MemoryBlob request){
-            Result comCallResult_ = this->implementer()->write(request);
-            return comCallResult_;
+            try{
+                this->implementer()->write(request);
+            }
+            catch(...){
+                return LFramework::Result::UnknownFailure;
+            }
+            return LFramework::Result::Ok;
         }
     };
     //Interface Wrapper
     template<>
     class InterfaceWrapper<MicroNetwork::Task::MemoryAccess::IHostToDevice> : public InterfaceWrapper<LFramework::IUnknown> {
     public:
-        Result read(MicroNetwork::Task::MemoryAccess::MemoryRegion request){
-            return reinterpret_cast<InterfaceAbi<MicroNetwork::Task::MemoryAccess::IHostToDevice>*>(_abi)->read(request);
-        } //read
-        Result write(MicroNetwork::Task::MemoryAccess::MemoryBlob request){
-            return reinterpret_cast<InterfaceAbi<MicroNetwork::Task::MemoryAccess::IHostToDevice>*>(_abi)->write(request);
-        } //write
+        void read(MicroNetwork::Task::MemoryAccess::MemoryRegion request){
+            auto comCallResult = reinterpret_cast<InterfaceAbi<MicroNetwork::Task::MemoryAccess::IHostToDevice>*>(_abi)->read(request);
+            if(comCallResult != Result::Ok){
+                throw ComException(comCallResult);
+            }
+        }
+        void write(MicroNetwork::Task::MemoryAccess::MemoryBlob request){
+            auto comCallResult = reinterpret_cast<InterfaceAbi<MicroNetwork::Task::MemoryAccess::IHostToDevice>*>(_abi)->write(request);
+            if(comCallResult != Result::Ok){
+                throw ComException(comCallResult);
+            }
+        }
     };
 }
 namespace MicroNetwork::Task::MemoryAccess{
@@ -104,24 +120,40 @@ namespace LFramework{
     template<class TImplementer>
     struct InterfaceRemap<MicroNetwork::Task::MemoryAccess::IDeviceToHost, TImplementer> : public InterfaceRemap<LFramework::IUnknown, TImplementer>{
         virtual Result LFRAMEWORK_COM_CALL readResponse(MicroNetwork::Task::MemoryAccess::MemoryBlob response){
-            Result comCallResult_ = this->implementer()->readResponse(response);
-            return comCallResult_;
+            try{
+                this->implementer()->readResponse(response);
+            }
+            catch(...){
+                return LFramework::Result::UnknownFailure;
+            }
+            return LFramework::Result::Ok;
         }
         virtual Result LFRAMEWORK_COM_CALL writeResponse(bool success){
-            Result comCallResult_ = this->implementer()->writeResponse(success);
-            return comCallResult_;
+            try{
+                this->implementer()->writeResponse(success);
+            }
+            catch(...){
+                return LFramework::Result::UnknownFailure;
+            }
+            return LFramework::Result::Ok;
         }
     };
     //Interface Wrapper
     template<>
     class InterfaceWrapper<MicroNetwork::Task::MemoryAccess::IDeviceToHost> : public InterfaceWrapper<LFramework::IUnknown> {
     public:
-        Result readResponse(MicroNetwork::Task::MemoryAccess::MemoryBlob response){
-            return reinterpret_cast<InterfaceAbi<MicroNetwork::Task::MemoryAccess::IDeviceToHost>*>(_abi)->readResponse(response);
-        } //readResponse
-        Result writeResponse(bool success){
-            return reinterpret_cast<InterfaceAbi<MicroNetwork::Task::MemoryAccess::IDeviceToHost>*>(_abi)->writeResponse(success);
-        } //writeResponse
+        void readResponse(MicroNetwork::Task::MemoryAccess::MemoryBlob response){
+            auto comCallResult = reinterpret_cast<InterfaceAbi<MicroNetwork::Task::MemoryAccess::IDeviceToHost>*>(_abi)->readResponse(response);
+            if(comCallResult != Result::Ok){
+                throw ComException(comCallResult);
+            }
+        }
+        void writeResponse(bool success){
+            auto comCallResult = reinterpret_cast<InterfaceAbi<MicroNetwork::Task::MemoryAccess::IDeviceToHost>*>(_abi)->writeResponse(success);
+            if(comCallResult != Result::Ok){
+                throw ComException(comCallResult);
+            }
+        }
     };
 }
 namespace MicroNetwork::Task::MemoryAccess{
@@ -143,24 +175,44 @@ namespace LFramework{
     template<class TImplementer>
     struct InterfaceRemap<MicroNetwork::Task::MemoryAccess::IStream, TImplementer> : public InterfaceRemap<LFramework::IUnknown, TImplementer>{
         virtual Result LFRAMEWORK_COM_CALL outStream(LFramework::ComPtr<MicroNetwork::Task::MemoryAccess::IHostToDevice>& result){
-            Result comCallResult_ = this->implementer()->outStream(result);
-            return comCallResult_;
+            try{
+                result = this->implementer()->outStream();
+            }
+            catch(...){
+                return LFramework::Result::UnknownFailure;
+            }
+            return LFramework::Result::Ok;
         }
         virtual Result LFRAMEWORK_COM_CALL inStream(LFramework::ComPtr<MicroNetwork::Task::MemoryAccess::IDeviceToHost>& result){
-            Result comCallResult_ = this->implementer()->inStream(result);
-            return comCallResult_;
+            try{
+                result = this->implementer()->inStream();
+            }
+            catch(...){
+                return LFramework::Result::UnknownFailure;
+            }
+            return LFramework::Result::Ok;
         }
     };
     //Interface Wrapper
     template<>
     class InterfaceWrapper<MicroNetwork::Task::MemoryAccess::IStream> : public InterfaceWrapper<LFramework::IUnknown> {
     public:
-        Result outStream(LFramework::ComPtr<MicroNetwork::Task::MemoryAccess::IHostToDevice> result){
-            return reinterpret_cast<InterfaceAbi<MicroNetwork::Task::MemoryAccess::IStream>*>(_abi)->outStream(result);
-        } //outStream
-        Result inStream(LFramework::ComPtr<MicroNetwork::Task::MemoryAccess::IDeviceToHost> result){
-            return reinterpret_cast<InterfaceAbi<MicroNetwork::Task::MemoryAccess::IStream>*>(_abi)->inStream(result);
-        } //inStream
+        LFramework::ComPtr<MicroNetwork::Task::MemoryAccess::IHostToDevice> outStream(){
+            LFramework::ComPtr<MicroNetwork::Task::MemoryAccess::IHostToDevice> result;
+            auto comCallResult = reinterpret_cast<InterfaceAbi<MicroNetwork::Task::MemoryAccess::IStream>*>(_abi)->outStream(result);
+            if(comCallResult != Result::Ok){
+                throw ComException(comCallResult);
+            }
+            return result;
+        }
+        LFramework::ComPtr<MicroNetwork::Task::MemoryAccess::IDeviceToHost> inStream(){
+            LFramework::ComPtr<MicroNetwork::Task::MemoryAccess::IDeviceToHost> result;
+            auto comCallResult = reinterpret_cast<InterfaceAbi<MicroNetwork::Task::MemoryAccess::IStream>*>(_abi)->inStream(result);
+            if(comCallResult != Result::Ok){
+                throw ComException(comCallResult);
+            }
+            return result;
+        }
     };
 }
 
