@@ -8,6 +8,9 @@ add_executable(McuControlApp)
 
 
 add_subdirectory(Dependencies/MicroNetwork.Library)
+add_subdirectory(Dependencies/McuControl.Library)
+#add_subdirectory(Dependencies/MicroNetworkUser)
+
 
 target_sources(McuControlApp 
 PRIVATE 
@@ -28,6 +31,8 @@ PRIVATE
 	LFramework::UnitTest
 	LFramework::IO
 	LFramework::IO::Terminal
+	McuControl::Library
+	MicroNetworkUser
 )
 
 target_compile_definitions(McuControlApp 

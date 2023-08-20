@@ -8,6 +8,9 @@
 #include <MicroNetwork.Task.MemoryAccess.IStream.IoStreamDescriptor.h>
 #include <MicroNetwork.Host.h>
 
+#include <McuControlImpl.h>
+#include <MicroNetwork/User/LinkConstructor.h>
+
 #include <thread>
 #include <chrono>
 
@@ -34,8 +37,25 @@ int main() {
         if(id != updateId){
             updateId = id;
             std::cout << "New update ID: " << id << std::endl;
-        }
 
+            auto nodes = network->getNodes();
+            for(auto node : nodes){
+                auto mcuControlId = LFramework::getInterfaceId<MicroNetwork::Task::MemoryAccess::IStream>();
+                if(network->isTaskSupported(node, mcuControlId)){
+                    std::cout << "Found McuControl device" << std::endl;
+
+                    auto mcuControlTask = MicroNetwork::User::LinkConstructor<McuControl::IMcuControl, McuControl::Impl>::constructLink(network, node);
+
+                    while(true){
+                        mcuControlTask->readMemory();
+                        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+                    }
+
+                }else{
+                    std::cout << "Found NOT McuControl device" << std::endl;
+                }
+            }
+        }
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
    
