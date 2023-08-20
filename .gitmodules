@@ -4,3 +4,6 @@
 [submodule "Dependencies/McuControl.Library"]
 	path = Dependencies/McuControl.Library
 	url = https://github.com/L-proger/McuControl.Library.git
+[submodule "ApiGenerator/ComInterfaceGenerator"]
+	path = ApiGenerator/ComInterfaceGenerator
+	url = https://github.com/L-proger/ComInterfaceGenerator.git
