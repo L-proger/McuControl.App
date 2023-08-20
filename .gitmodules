@@ -1,0 +1,6 @@
+[submodule "Dependencies/MicroNetwork.Library"]
+	path = Dependencies/MicroNetwork.Library
+	url = https://github.com/L-proger/MicroNetwork.Library.git
+[submodule "Dependencies/McuControl.Library"]
+	path = Dependencies/McuControl.Library
+	url = https://github.com/L-proger/McuControl.Library.git
