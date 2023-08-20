@@ -46,11 +46,11 @@ int main() {
 
                     auto mcuControlTask = MicroNetwork::User::LinkConstructor<McuControl::IMcuControl, McuControl::Impl>::constructLink(network, node);
 
-                    while(true){
+                    while(mcuControlTask->isConnected()){
                         mcuControlTask->readMemory();
                         std::this_thread::sleep_for(std::chrono::milliseconds(100));
                     }
-
+                    std::cout << "McuControl task finished" << std::endl;
                 }else{
                     std::cout << "Found NOT McuControl device" << std::endl;
                 }

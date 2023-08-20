@@ -6,6 +6,7 @@ set(ApiIncludeDirs
     "../Dependencies/MicroNetwork.Library/Dependencies/MicroNetworkCommon/Api"
     "../Dependencies/MicroNetwork.Library/Dependencies/MicroNetworkHost/Api"
     "../Dependencies/McuControl.Library/Api"
+    "../Dependencies/MicroNetworkUser/Api"
 )
 
 
@@ -13,7 +14,7 @@ set(ApiIncludeDirs
 set(ApiOutputDir "../Interfaces")
 set(ApiOutputLanguage "Cpp")
 set(ApiEnableExceptions ON)
-set(ApiOutputModules "McuControl" "MicroNetwork.Common" "MicroNetwork.Host" "MicroNetwork.Task.MemoryAccess")
+set(ApiOutputModules "McuControl" "MicroNetwork.Common" "MicroNetwork.Host" "MicroNetwork.Task.MemoryAccess" "MicroNetwork.User")
 
 ComInterfaceGeneratorMakeArgs( OUTMODULES ${ApiOutputModules} RESULT_VAR "GenerateApiArgs" )
 
