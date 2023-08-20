@@ -3,13 +3,15 @@ project(ApiGenerator)
 add_subdirectory(ComInterfaceGenerator)
 
 set(ApiIncludeDirs 
-    "../Dependencies/MicroNetworkDevice/Api"
-    "../Dependencies/MicroNetworkCommon/Api"
+    "../Dependencies/MicroNetwork.Library/Dependencies/MicroNetworkCommon/Api"
 )
-set(ApiOutputDir "../F7/Interfaces")
+
+
+
+set(ApiOutputDir "../Interfaces")
 set(ApiOutputLanguage "Cpp")
 set(ApiEnableExceptions OFF)
-set(ApiOutputModules "MicroNetwork.Common" "MicroNetwork.Device" "MicroNetwork.Task.MemoryAccess")
+set(ApiOutputModules "MicroNetwork.Common" "MicroNetwork.Task.MemoryAccess")
 
 ComInterfaceGeneratorMakeArgs( OUTMODULES ${ApiOutputModules} RESULT_VAR "GenerateApiArgs" )
 
@@ -29,7 +31,7 @@ add_custom_target(GenerateApi
     COMMAND ${CMAKE_COMMAND} -E echo "-- Generating API OUT serializers"
     COMMAND $<TARGET_FILE:ComInterfaceGenerator> "generateInterfaceSerializer" -d "out" ${GenerateApiOutSerializersArgs}
     COMMAND ${CMAKE_COMMAND} -E echo "-- Generating IO stream descriptor"
-    COMMAND $<TARGET_FILE:ComInterfaceGenerator> "generateIoStreamDescriptor" "--invert" ${GenerateIoStreamDescriptorArgs}
+    COMMAND $<TARGET_FILE:ComInterfaceGenerator> "generateIoStreamDescriptor" ${GenerateIoStreamDescriptorArgs}
     VERBATIM
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 )

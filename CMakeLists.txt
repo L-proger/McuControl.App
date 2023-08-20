@@ -19,4 +19,16 @@ PRIVATE
 
 #target_compile_definitions(LFramework PUBLIC LF_USB_HOST)
 
-#target_link_libraries(libMicroNetwork PRIVATE User32 Advapi32 Ole32 Winusb SetupAPI)
+target_link_libraries(McuControlApp 
+PRIVATE 
+	LFramework
+	LFramework::UnitTest
+	LFramework::IO
+	LFramework::IO::Terminal
+)
+
+target_compile_definitions(McuControlApp 
+INTERFACE 
+	LF_THREAD_STD
+	LF_TERMINAL_STREAM_COUT
+)
