@@ -45,7 +45,7 @@ namespace LFramework{
     template<class TImplementer>
     struct InterfaceRemap<MicroNetwork::Host::INetwork, TImplementer> : public InterfaceRemap<LFramework::IUnknown, TImplementer>{
         virtual Result LFRAMEWORK_COM_CALL startTask(MicroNetwork::Host::NodeHandle node, LFramework::Guid taskId, LFramework::InterfaceAbi<MicroNetwork::Common::IDataReceiver>* userDataReceiver, LFramework::ComPtr<MicroNetwork::Common::IDataReceiver>& result){
-            LFramework::ComPtr<MicroNetwork::Common::IDataReceiver> userDataReceiverMarshaler;xcfv
+            LFramework::ComPtr<MicroNetwork::Common::IDataReceiver> userDataReceiverMarshaler;
             userDataReceiverMarshaler.attach(userDataReceiver);
             try{
                 result = this->implementer()->startTask(node, taskId, userDataReceiverMarshaler);
